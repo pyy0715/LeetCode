@@ -4,13 +4,16 @@ SELECT
     A.Salary
 FROM
     Employee A
-    INNER JOIN Department B
-    ON A.DepartmentId = B.Id
+INNER JOIN 
+    Department B
+ON 
+    A.DepartmentId = B.Id
 WHERE
     (A.DepartmentId , A.Salary) IN
     (   SELECT
             DepartmentId, MAX(Salary)
         FROM
             Employee
-        GROUP BY DepartmentId
+        GROUP BY 
+            DepartmentId
     );
