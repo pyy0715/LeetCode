@@ -3,6 +3,9 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+from collections import deque
+
 class Solution(object):
     def isPalindrome(self, head):
         """
@@ -10,7 +13,7 @@ class Solution(object):
         :rtype: bool
         """
         
-        q = []
+        q = deque([])
         
         if not head:
             return True
@@ -21,6 +24,6 @@ class Solution(object):
             node = node.next
             
         while len(q)>1:
-            if q.pop(0)!=q.pop():
+            if q.popleft()!=q.pop():
                 return False
         return True
