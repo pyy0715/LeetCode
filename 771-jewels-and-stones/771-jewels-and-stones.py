@@ -11,9 +11,6 @@ class Solution(object):
         
         answer = 0
         for s in jewels:
-            if s in stone_counter.keys():
-                answer+=stone_counter[s]
-            else:
-                pass
+            answer+=stone_counter[s]
         return answer
         
