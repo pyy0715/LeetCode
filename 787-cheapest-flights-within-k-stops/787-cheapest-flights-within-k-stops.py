@@ -18,18 +18,19 @@ class Solution(object):
             graph[u].append((v, w))
 
         # 큐 변수: [(가격, 정점, 남은 가능 경유지 수)]
-        Q = [(0, src, K)]
+        Q = [(0, src, 0)]
 
         # 우선 순위 큐 최소값 기준으로 도착점까지 최소 비용 판별
         while Q:
-            price, node, k = heapq.heappop(Q)
+            price, node, cnt = heapq.heappop(Q)
             if node == dst:
                 return price
-            if k >= 0:
+            
+            if cnt<=K:
                 for v, w in graph[node]:
                     alt = price + w
-                    if alt < weight[v][0] or k-1 >= weight[v][1]:
-                        weight[v] = (alt, k-1)
-                        heapq.heappush(Q, (alt, v, k - 1))
+                    if alt < weight[v][0] or cnt+1 <= weight[v][1]:
+                        weight[v] = (alt, cnt+1)
+                        heapq.heappush(Q, (alt, v, cnt+1))
         return -1
         
