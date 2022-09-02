@@ -1,7 +1,12 @@
+class TrieNode:
+    def __init__(self):
+        self.word = False
+        self.children = {}
+
 class Trie(object):
 
     def __init__(self):
-        self.bow = set()
+        self.root = TrieNode()
         
 
     def insert(self, word):
@@ -9,7 +14,12 @@ class Trie(object):
         :type word: str
         :rtype: None
         """
-        self.bow.add(word)
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.word = True
         
 
     def search(self, word):
@@ -17,21 +27,25 @@ class Trie(object):
         :type word: str
         :rtype: bool
         """
-        if word in self.bow:
-            return True
-        else:
-            return False
-        
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return node.word
+            
 
     def startsWith(self, prefix):
         """
         :type prefix: str
         :rtype: bool
         """
-        for i in self.bow:
-            if i.startswith(prefix):
-                return True
-        return False
+        node = self.root
+        for char in prefix:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True
         
 
 
