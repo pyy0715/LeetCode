@@ -7,20 +7,14 @@ class Solution(object):
         :type s: List[int]
         :rtype: int
         """
-        heapq.heapify(s)
-        
         g.sort()
-        count = 0
-
-        for i in g:
-            if not s:
-                break
-            
-            while s:
-                q = heapq.heappop(s)
-                if i<=q:
-                    count+=1
-                    break
-        return count
-            
+        s.sort()
+        
+        i, j = 0, 0
+        
+        while i<len(g) and j<len(s):
+            if s[j]>=g[i]:
+                i+=1
+            j+=1
+        return i
             
