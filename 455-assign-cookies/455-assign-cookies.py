@@ -13,6 +13,9 @@ class Solution(object):
         count = 0
 
         for i in g:
+            if not s:
+                break
+            
             while s:
                 q = heapq.heappop(s)
                 if i<=q:
